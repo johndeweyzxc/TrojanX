@@ -14,6 +14,8 @@ You need to create an authentication file, you need to store the following:
 <li>Random 16 bytes for key</li>
 <li>Randome 16 bytes for iv</li>
 
+---
+
 Run the keyboard logger
 
 ```
